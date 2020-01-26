@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <h1 align="center"><%= name %>'s Planner</h1>
+    <style>
+        body {
+            font: 14px/1.5em "Lucida Grande",Arial,sans-serif;
+            margin: 50px 300px;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+<p>
+    <button type="submit" onclick="run();">Submit</button>
+</p>
+</body>
+<script>
+    function run() {
+      a = abcd.itenary;
+      t = abcd.times;
+      let array = [
+        { Time: "10:00am", Place: "Leave <%= hotel %>" +  mySelection},
+        { Time: "10:00am - " + t[0], Place: "Travel from <%= hotel %> to " + a[0] },
+        { Time: t[0] + " - " + t[1], Place: "Stay in " + a[0] },
+        { Time: t[1] + " - " + t[2], Place: "Travel from " + a[0] + "to + " + a[1] },
+        { Time: t[2] + " - " + t[3], Place: "Stay in " + a[1] },
+        { Time: t[3] + " - " + t[4], Place: "Travel from " + a[1] + "to + " + a[2] },
+        { Time: t[4] + " - " + t[5], Place: "Stay in " + a[2] },
+        { Time: t[5] + " - " + t[6], Place: "Travel from " + a[2] + "to + " + a[3] },
+        { Time: t[6] + " - " + t[7], Place: "Stay in " + a[3] },
+        { Time: t[7] + " - " + t[8], Place: "Travel from " + a[3] + "to + " + a[4] },
+        { Time: t[8] + " - " + t[9], Place: "Stay in " + a[4] },
+        { Time: t[9] + " - " + t[10], Place: "Travel from " + a[4] + "to + " + a[5] },
+        { Time: t[10] + " - " + t[11], Place: "Stay in " + a[5] },
+        { Time: t[11] + " - " + t[12], Place: "Travel from " + a[5] + "to + " + "<%= hotel %>" }
+      ];
+
+      function generateTableHead(table, data) {
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+        for (let key of data) {
+          let th = document.createElement("th");
+          let text = document.createTextNode(key);
+          th.appendChild(text);
+          row.appendChild(th);
+        }
+      }
+  
+      function generateTable(table, data) {
+        for (let element of data) {
+          let row = table.insertRow();
+          for (key in element) {
+            let cell = row.insertCell();
+            let text = document.createTextNode(element[key]);
+            cell.appendChild(text);
+          }
+        }
+      }
+  
+      let table = document.querySelector("table");
+      let data = Object.keys(array[0]);
+      generateTableHead(table, data);
+      generateTable(table, array);
+    }
+</script>
+</html>
